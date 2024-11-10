@@ -1,1 +1,1 @@
-# Recommendation-System-Model
+# Recommendation-System-Model: Content Based Recommendation, Popularity Based Recommendation and Collaborative Recommendation System
