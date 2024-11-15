@@ -36,6 +36,9 @@ class DataIngestion:
                              movies_df['vote_average'], movies_df['popularity']], axis=1)
 
             movies_subset_df['release_date'] = movies_subset_df['release_date'].apply(clean_release_date)
+
+            # Add a new column that merges release year with the title
+            movies_subset_df['clean_title'] = movies_subset_df['title'] + movies_subset_df['release_date']
             movies_subset_df = self.feature_engineering(movies_subset_df)
             
             os.makedirs(os.path.dirname(self.ingestion.raw_data_path), exist_ok=True)
