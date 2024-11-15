@@ -29,6 +29,6 @@ class DataTransformation:
 
         vectorizer = self.get_data_transformer()
         scaled_data = vectorizer.fit_transform(data['new_title'])
-
+        joblib.dump(vectorizer, )
         return scaled_data
     
