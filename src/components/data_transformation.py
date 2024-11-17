@@ -9,6 +9,8 @@ from dataclasses import dataclass
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
+from utils import save_object
+
 
 @dataclass
 class DataTransformationConfig:
@@ -21,6 +23,7 @@ class DataTransformation:
 
     def get_data_transformer(self):
         vectorizer = TfidfVectorizer(ngram_range=(1,6), stop_words='english', lowercase=True)
+        save_object(self.transformation.vectorizer_class, vectorizer)
         return vectorizer
     
 
