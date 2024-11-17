@@ -54,7 +54,3 @@ class DataIngestion:
         cols_to_drop = ['title', 'release_date', 'cast']
         movies_subset_df = drop_columns(movies_subset_df, cols_to_drop)
         
-
-
-def recommend_movie(movie_name):
-    pass
