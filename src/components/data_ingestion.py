@@ -10,6 +10,8 @@ from dataclasses import dataclass
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
+import data_transformation
+
 
 def clean_release_date(date):
     return str(date).split('-')[0]
@@ -43,8 +45,8 @@ class DataIngestion:
             
             os.makedirs(os.path.dirname(self.ingestion.raw_data_path), exist_ok=True)
             movies_subset_df.to_csv(self.ingestion.raw_data_path, index=False, header=True)
-            
-            return movies_subset_df
+
+            return self.ingestion.raw_data_path
 
         except Exception as e:
             return str(e)
@@ -53,4 +55,12 @@ class DataIngestion:
         movies_subset_df = movies_subset_df.fillna('')
         cols_to_drop = ['title', 'release_date', 'cast']
         movies_subset_df = drop_columns(movies_subset_df, cols_to_drop)
+        return movies_subset_df
         
+
+if __name__ == '__main__':
+    obj = DataIngestion()
+    clean_data = obj.initiate_data_ingestion()
+
+    dt = data_transformation.DataTransformation()
+    dt.initiate_data_transformation(clean_data)

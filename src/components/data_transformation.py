@@ -9,12 +9,11 @@ from dataclasses import dataclass
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-from utils import save_object
-
+from src.utils import save_object
 
 @dataclass
 class DataTransformationConfig:
-    vectorizer_class: str = os.path.join('artifacts', 'vectorizer')
+    vectorizer_path: str = os.path.join('artifacts', 'vectorizer')
 
 
 class DataTransformation:
@@ -32,6 +31,6 @@ class DataTransformation:
 
         vectorizer = self.get_data_transformer()
         scaled_data = vectorizer.fit_transform(data['new_title'])
-        joblib.dump(vectorizer, )
+        joblib.dump(vectorizer, self.transformation.vectorizer_path)
         return scaled_data
     

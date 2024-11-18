@@ -4,4 +4,6 @@ import pandas as pd
 from dataclasses import dataclass
 
 
-class MovieRecommendationConfig
+class MovieRecommendation:
+    def initiate_movie_recommendation(self, title):
+        title
