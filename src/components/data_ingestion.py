@@ -7,7 +7,7 @@ from dataclasses import dataclass
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-import data_transformation
+import data_transformation, movie_recommendation_by_title
 
 
 def clean_release_date(date):
@@ -37,7 +37,7 @@ class DataIngestion:
             movies_subset_df['release_date'] = movies_subset_df['release_date'].apply(clean_release_date)
 
             # Add a new column that merges release year with the title
-            movies_subset_df['clean_title'] = movies_subset_df['title'] + movies_subset_df['release_date']
+            movies_subset_df['clean_title'] = movies_subset_df['title'] + ' ' + movies_subset_df['release_date']
             movies_subset_df = self.feature_engineering(movies_subset_df)
             
             os.makedirs(os.path.dirname(self.ingestion.raw_data_path), exist_ok=True)
@@ -60,4 +60,8 @@ if __name__ == '__main__':
     clean_data = obj.initiate_data_ingestion()
 
     dt = data_transformation.DataTransformation()
-    dt.initiate_data_transformation(clean_data)
+    movie_data, cleaned_data = dt.initiate_data_transformation(clean_data)
+
+    movie_recom = movie_recommendation_by_title.MovieRecommendation()
+    recommendations = movie_recom.initiate_movie_recommendation('iron man', movie_data)
+    print(recommendations)

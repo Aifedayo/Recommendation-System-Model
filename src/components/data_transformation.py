@@ -25,6 +25,7 @@ def save_object(filepath, obj):
 @dataclass
 class DataTransformationConfig:
     vectorizer_path: str = os.path.join('artifacts', 'vectorizer')
+    scaled_data_path: str = os.path.join('artifacts', 'scaled_data')
 
 
 class DataTransformation:
@@ -43,5 +44,6 @@ class DataTransformation:
         vectorizer = self.get_data_transformer()
         scaled_data = vectorizer.fit_transform(data['clean_title'])
         joblib.dump(vectorizer, self.transformation.vectorizer_path)
-        return scaled_data
+        joblib.dump(scaled_data, self.transformation.scaled_data_path)
+        return (data, scaled_data)
     
