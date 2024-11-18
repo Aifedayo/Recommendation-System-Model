@@ -1,6 +1,6 @@
 import os
 import joblib
-import difflib
+import pickle
 
 import pandas as pd
 
@@ -9,7 +9,18 @@ from dataclasses import dataclass
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-from src.utils import save_object
+# from src.utils import save_object
+
+def save_object(filepath, obj):
+    try:
+        dir_path = os.path.dirname(filepath)
+        os.makedirs(dir_path, exist_ok=True)
+
+        with open(filepath, 'wb') as file:
+            pickle.dump(obj, file)
+
+    except Exception as e:
+        return str(e)
 
 @dataclass
 class DataTransformationConfig:
@@ -22,7 +33,7 @@ class DataTransformation:
 
     def get_data_transformer(self):
         vectorizer = TfidfVectorizer(ngram_range=(1,6), stop_words='english', lowercase=True)
-        save_object(self.transformation.vectorizer_class, vectorizer)
+        save_object(self.transformation.vectorizer_path, vectorizer)
         return vectorizer
     
 
@@ -30,7 +41,7 @@ class DataTransformation:
         data = pd.read_csv(data_path)
 
         vectorizer = self.get_data_transformer()
-        scaled_data = vectorizer.fit_transform(data['new_title'])
+        scaled_data = vectorizer.fit_transform(data['clean_title'])
         joblib.dump(vectorizer, self.transformation.vectorizer_path)
         return scaled_data
     
