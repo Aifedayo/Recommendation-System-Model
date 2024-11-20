@@ -16,3 +16,7 @@ def movie_recommendation_by_title(input_data):
     movie_recom = movie_recommendation_by_title.MovieRecommendation()
     recommendations = movie_recom.initiate_movie_recommendation('iron man', movie_data)
     movie_recommendation_by_title(input_data='Iron man')
+
+
+def main():
+    st.title('Movie Recommendations by Title')
