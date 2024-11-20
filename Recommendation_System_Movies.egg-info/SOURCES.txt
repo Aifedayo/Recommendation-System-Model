@@ -1,0 +1,15 @@
+README.md
+setup.py
+Recommendation_System_Movies.egg-info/PKG-INFO
+Recommendation_System_Movies.egg-info/SOURCES.txt
+Recommendation_System_Movies.egg-info/dependency_links.txt
+Recommendation_System_Movies.egg-info/requires.txt
+Recommendation_System_Movies.egg-info/top_level.txt
+src/__init__.py
+src/utils.py
+src/client/__init__.py
+src/client/main.py
+src/components/__init__.py
+src/components/data_ingestion.py
+src/components/data_transformation.py
+src/components/movie_recommendation_by_title.py

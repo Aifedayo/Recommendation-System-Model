@@ -63,5 +63,5 @@ if __name__ == '__main__':
     movie_data, cleaned_data = dt.initiate_data_transformation(clean_data)
 
     movie_recom = movie_recommendation_by_title.MovieRecommendation()
-    recommendations = movie_recom.initiate_movie_recommendation('iron man', movie_data)
+    recommendations = movie_recom.initiate_movie_recommendation('iron lady', movie_data)
     print(recommendations)
