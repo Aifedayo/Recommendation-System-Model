@@ -7,7 +7,7 @@ from dataclasses import dataclass
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-import data_transformation, movie_recommendation_by_title
+from src.components import data_transformation, movie_recommendation_by_title
 
 
 def clean_release_date(date):

@@ -12,11 +12,19 @@ def movie_recommendation_by_title(input_data):
     movie_data, cleaned_data = dt.initiate_data_transformation(clean_data)
 
     movie_recom = movie_recommendation_by_title.MovieRecommendation()
-    recommendations = movie_recom.initiate_movie_recommendation('iron man', movie_data)
-    movie_recom = movie_recommendation_by_title.MovieRecommendation()
-    recommendations = movie_recom.initiate_movie_recommendation('iron man', movie_data)
-    movie_recommendation_by_title(input_data='Iron man')
-
+    recommendations = movie_recom.initiate_movie_recommendation(input_data, movie_data)
+    return recommendations
 
 def main():
     st.title('Movie Recommendations by Title')
+
+    movie_name = st.text_input('Enter a movie title')
+    recom = ''
+    if st.button('Movie Recommendation'):
+        recom = movie_recommendation_by_title(movie_name)
+    
+    st.success(recom)
+
+
+if __name__ == '__main__':
+    main()
