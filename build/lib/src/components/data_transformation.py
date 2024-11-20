@@ -42,8 +42,9 @@ class DataTransformation:
         data = pd.read_csv(data_path)
 
         vectorizer = self.get_data_transformer()
+
         scaled_data = vectorizer.fit_transform(data['clean_title'])
         joblib.dump(vectorizer, self.transformation.vectorizer_path)
         joblib.dump(scaled_data, self.transformation.scaled_data_path)
-        return (data, scaled_data)
+        return scaled_data
     

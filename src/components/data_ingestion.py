@@ -2,6 +2,7 @@
 import pandas as pd
 import os
 
+import joblib
 from dataclasses import dataclass
 
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -50,7 +51,7 @@ class DataIngestion:
 
     def feature_engineering(self, movies_subset_df):
         movies_subset_df = movies_subset_df.fillna('')
-        cols_to_drop = ['title', 'release_date', 'cast']
+        cols_to_drop = ['release_date', 'cast']
         movies_subset_df = drop_columns(movies_subset_df, cols_to_drop)
         return movies_subset_df
         
@@ -58,10 +59,12 @@ class DataIngestion:
 if __name__ == '__main__':
     obj = DataIngestion()
     clean_data = obj.initiate_data_ingestion()
-
+    
     dt = data_transformation.DataTransformation()
-    movie_data, cleaned_data = dt.initiate_data_transformation(clean_data)
-
+    scaled_data = dt.initiate_data_transformation(clean_data)
     movie_recom = movie_recommendation_by_title.MovieRecommendation()
-    recommendations = movie_recom.initiate_movie_recommendation('iron lady', movie_data)
+
+    movie_title = 'three'
+
+    recommendations = movie_recom.initiate_movie_recommendation(movie_title, scaled_data)
     print(recommendations)
