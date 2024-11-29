@@ -22,6 +22,7 @@ class MovieRecommendation:
         movies_list = movies_data['title'].tolist()
 
         find_close_matches = difflib.get_close_matches(title, movies_list)
+        print(find_close_matches)
         close_match = find_close_matches[0]
 
         idx_of_movie = movies_data[movies_data.title == close_match].index[0]

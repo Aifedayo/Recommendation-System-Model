@@ -1,5 +1,7 @@
 import joblib
 import streamlit as st
+import pandas as pd
+import numpy as np
 
 from src.components import (
     data_ingestion, data_transformation, movie_recommendation_by_title)
@@ -24,7 +26,9 @@ def main():
     if st.button('Recommend'):
         recom = movie_recommend_by_title(movie_name)
         st.success('Here are your recommendations')
-    st.text(recom)
+        movies_dict = {'movies': recom}
+        df = pd.DataFrame(data=movies_dict, index=np.arange(1, 11))
+        st.dataframe(df)
 
 
 if __name__ == '__main__':
